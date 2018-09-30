@@ -1,0 +1,9 @@
+name: TinyPixel Customizeable shopGUI
+main: AlexPads\Shop\TinyPixelDevz\Main
+version: 1.0.3
+api: [3.0.0]
+author: TinyPixelDevz
+
+commands:
+ shop:
+  description: "Shop Command!"
