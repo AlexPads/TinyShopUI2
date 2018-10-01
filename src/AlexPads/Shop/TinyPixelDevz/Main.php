@@ -41,8 +41,8 @@
          $this->getLogger()->info("ShopUI By TinyPixelDevz Team!");
      }
  
-    public function onCommand(CommandSender $sender, Command $cmd, string $label, array $args): bool
-    {
+    public function onCommand(CommandSender $sender, Command $cmd, string $label,array $args) : bool {
+     
         switch ($cmd->getName()) {
             case "shop":
                 if ($sender instanceof Player) {
@@ -57,9 +57,10 @@
  
      public function mainForm(Player $player)
      {
-         $form = $this->formapi->createSimpleForm(function (Player $player, $data) {
-             if (isset($data[0])) {
+		       $api = $this->getServer()->getPluginManager()->getPlugin("FormAPI");
+		       $form = $api->createCustomForm(function (Player $sender, array $data = null){
                  $result = $data[0];
+              if ($result === null){
                  $categories = [0 => "weapons", 1 => "tools", 2 => "armor", 3 => "blocks", 4 => "specials", 5 => "masks"];
                  switch ($result) {
                      case 6:
@@ -85,10 +86,11 @@
          $form->sendToPlayer($player);
      }
  
-     public function categoryForm(Player $player, $category)
-     {
-         $form = $this->formapi->createSimpleForm(function (Player $player, $data) {
-             if (isset($data[0])) {
+     public function categoryForm(Player $player, $category){
+		       $api = $this->getServer()->getPluginManager()->getPlugin("FormAPI");
+		       $form = $api->createCustomForm(function (Player $sender, array $data = null){
+                 $result = $data[0];
+              if ($result === null){
                  $category = $this->category[$player->getLowerCaseName()];
                  if ($data[0] < count($this->$category)) {
                      $item = $this->$category[$data[0]];
